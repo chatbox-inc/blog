@@ -2,7 +2,7 @@
   <div>
     <page-navi/>
     <nuxt/>
-    <hr>
+    <!--<hr>-->
     <page-footer/>
   </div>
 </template>

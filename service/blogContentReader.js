@@ -1,27 +1,52 @@
-const createPostBrief = ({
-  title, created_at, category, slug, summary
-}) => {
+import axios from 'axios'
+
+
+// axios Client
+const createAxios = () => {
+  return new axios.create({
+    baseURL: "http://localhost:3000"
+  })
+}
+
+
+// 簡易投稿型
+const createPostHeader = (args) => {
+  const {
+    title,
+    created_at,
+    category,
+    slug,
+    url,
+    summary
+  } = args
   return {
-    title, created_at, category, slug,summary
+    title,
+    created_at,
+    category,
+    slug,
+    url,
+    summary
   }
 }
 
-const createPostDetail = (arg) => {
-  const brief = createPostBrief(arg)
-  const { content } = arg
-  return { ...brief, content}
+// 投稿本文型
+const createPostBody = ({ content }) => {
+  return { content }
 }
 
+//
 const convertFilemap2Briefs = (args) => {
   const {
     title, created_at, base,dir, ext
   } = args
 
-  return createPostBrief({
+  const slug = base.replace(new RegExp(`${ext}$`),"")
+
+  return createPostHeader({
     title,
-    created_at: created_at.substr(0,10),
-    category: dir.substr(4),
-    slug: base.replace(new RegExp(`${ext}$`),"")
+    created_at: created_at && created_at.substr(0,10),
+    category: dir.substr(7),
+    slug,
   })
 }
 
@@ -33,34 +58,22 @@ const convertFile2Post = (args) => {
   return createPostBrief({
     title,
     created_at: created_at.substr(0,10),
-    category: dir.substr(4),
+    category: dir.substr(10),
     slug: base.replace(new RegExp(`${ext}$`),"")
   })
 }
 
 
 
-export const loadArchives = (name) => {
-  if(process.server){
-    const fs =require("fs")
-    const path = require("path").resolve("static/_api/reports.json")
-    const {fileMap} = JSON.parse(fs.readFileSync( path, 'utf8'));
-    const rtn = [];
-    for(let fileKey in fileMap){
-      rtn.push(convertFilemap2Briefs(fileMap[fileKey]))
-    }
-    return rtn
-  }else{
-
-  }
+export const loadArchives = async () => {
+  const api = createAxios()
+  const {data} = await api.get("/api/summary/index.json")
+  return data
 }
 
-export const loadPost = (key) => {
-  if(process.server){
-    const fs =require("fs")
-    const path = require("path").resolve("_api/report/2018/36.json")
-    const content = JSON.parse(fs.readFileSync( path, 'utf8'));
-    return convertFile2Post(content)
-  }
+export const loadPost = async (path) => {
+  const api = createAxios()
+  const {data} = await api.get("/api/"+path)
+  return data
 }
 

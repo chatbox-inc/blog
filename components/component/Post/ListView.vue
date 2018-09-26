@@ -4,7 +4,7 @@
       <router-link :to="pageUrl">
         <h2 class="post-title">{{post.title}}</h2>
         <h3 class="post-subtitle">
-          Problems look mighty small from 150 miles up
+          {{post.summary}}
         </h3>
       </router-link>
       <p class="post-meta">Posted by
@@ -13,7 +13,6 @@
     </div>
     <hr>
   </div>
-
 </template>
 
 <script>
@@ -27,12 +26,14 @@
     },
     computed:{
       pageUrl(){
-        return `${this.post.category}/${this.post.slug}`
+        return `${this.post.html_url}`
       }
     }
   }
 </script>
 
 <style scoped>
-
+  .post-subtitle{
+    font-size: 24px;
+  }
 </style>

@@ -23,6 +23,9 @@ module.exports = {
       { src: '/js/clean-blog.min.js' },
     ]
   },
+  css: [
+    {src: 'highlight.js/styles/solarized-dark.css',lang:'css'},
+  ],
   /*
   ** Customize the progress bar color
   */

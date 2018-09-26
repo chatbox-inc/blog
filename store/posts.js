@@ -1,22 +1,29 @@
+import {loadArchives,loadPost} from "../service/blogContentReader";
+
 export const moduleName = "posts"
 
 
 export const state = () => ({
-  posts: []
+  posts: null,
+  post: null
 })
 
 export const mutations = {
   SET_POSTS (state,posts) {
     state.posts = posts
+  },
+  SET_POST (state,post) {
+    state.post = post
   }
 }
 
-
 export const actions = {
   async LOAD_ARCHIVES({commit},){
-
+    const posts = await loadArchives()
+    commit("SET_POSTS",posts)
   },
-  nuxtServerInit ({ commit }, { req }) {
-    commit("SET_POSTS","Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias aspernatur assumenda deserunt eius enim ipsum laborum, maiores minima necessitatibus nisi nulla officiis omnis pariatur reprehenderit sit soluta tempora totam?")
-  }
+  async LOAD_POST({commit},{path}){
+    const post = await loadPost(path)
+    commit("SET_POST",post)
+  },
 }
