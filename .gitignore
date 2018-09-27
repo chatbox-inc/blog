@@ -15,4 +15,4 @@ api
 
 .env
 
-static/feed.rss
+static/*.xml

@@ -2,6 +2,7 @@ const fs =require("fs-extra")
 const path =require("path")
 const moment = require("moment")
 const generateSiteMap = require("./blogFormatConv/sitemap")
+const generateRss = require("./blogFormatConv/rss")
 // 簡易投稿型
 const createPostHeader = (args) => {
   const {
@@ -98,7 +99,8 @@ const main = () => {
     }))
   })
 
-  fs.writeFileSync(path.resolve("static/feed.rss"),generateSiteMap(summary))
+  fs.writeFileSync(path.resolve("static/sitemap.xml"),generateSiteMap(summary))
+  fs.writeFileSync(path.resolve("static/feed.xml"),generateRss(summary))
 
   fs.mkdirSync('static/api/summary')
   fs.writeFileSync(path.resolve("static/api/summary/index.json"),JSON.stringify(summary))
