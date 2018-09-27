@@ -17,7 +17,7 @@ module.exports = {
     titleTemplate: meta.title,
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no' },
+      { name: 'viewport', content: 'width=device-width, minimum-scale=1, initial-scale=1' },
       { name: 'description', content: meta.description },
       { name: 'keyword', content: "大阪,Web制作,技術顧問,イベント,PHP,フロントエンド,株式会社chatbox,チャットボックス" },
       { property: 'og:title', content: meta.title },

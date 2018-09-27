@@ -10,7 +10,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="https://chatbox-inc.com/" target="_blank" rel="nofollow">chatbox</a>
+            <a class="nav-link" href="https://chatbox-inc.com/" target="_blank" rel="noopener">chatbox</a>
           </li>
           <!--<li class="nav-item">-->
             <!--<a class="nav-link" href="about.html">About</a>-->
@@ -19,7 +19,7 @@
             <!--<a class="nav-link" href="post.html">Sample Post</a>-->
           <!--</li>-->
           <li class="nav-item">
-            <a class="nav-link" href="https://chatbox-inc.com/contact/" target="_blank" rel="nofollow">Contact</a>
+            <a class="nav-link" href="https://chatbox-inc.com/contact/" target="_blank" rel="noopener">Contact</a>
           </li>
         </ul>
       </div>
