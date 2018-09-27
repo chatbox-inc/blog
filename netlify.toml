@@ -6,7 +6,7 @@
   command = "npm run generate"
 
 [build.environment]
-  FRONT_API_URL = "https://agitated-ride-b961a8.netlify.com/"
+  FRONT_API_URL="https://agitated-ride-b961a8.netlify.com/"
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
 [context.production]
@@ -22,9 +22,3 @@
 # Specific branch context: Deploys from this branch
 # will take these settings and override their
 # current ones.
-[context.master.environment]
-  http://localhost:3000 = "https://ichicon-dev.herokuapp.com"
-[context.dev.environment]
-  NUXT_APIDOMAIN = "https://ichicon-dev.herokuapp.com"
-[context.release.environment]
-  NUXT_APIDOMAIN = "https://ichicon.herokuapp.com"
