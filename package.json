@@ -29,7 +29,8 @@
     "moment": "^2.22.2",
     "npm-run-all": "^4.1.3",
     "nuxt": "^1.0.0",
-    "processmd": "^4.2.1"
+    "processmd": "^4.2.1",
+    "sitemap": "^2.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

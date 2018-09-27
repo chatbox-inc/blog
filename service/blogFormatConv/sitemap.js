@@ -1,14 +1,22 @@
-var sm = require('sitemap')
+const sitemap = require('sitemap')
+
+const config = {
+  hostname: "https://note.chatbox-inc.com"
+}
 
 
+module.exports =  (posts)=>{
+  const options = {
+    hostname: config.hostname,
+    urls: []
+  }
 
-
-const sitemap = sm.createSitemap({
-  hostname: 'http://www.mywebsite.com',
-  urls: [{
-    url: 'http://mobile.test.com/page-1/',
-    lastmodISO: '2015-06-27T15:30:00.000Z',
-    changefreq: 'weekly',
-    priority: 0.3
-  }]
-});
+  for ( let post of posts ) {
+    options.urls.push({
+      url: config.hostname + post.html_url,
+      lastmodISO: `${post.created_at}`,
+      changefreq: 'weekly',
+    })
+  }
+  return sitemap.createSitemap(options).toString()
+}
