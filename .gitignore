@@ -11,3 +11,6 @@ npm-debug.log
 dist
 
 _api
+api
+
+.env

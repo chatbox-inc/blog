@@ -1,4 +1,7 @@
 module.exports = {
+  env: {
+    API_URL: process.env.FRONT_API_URL
+  },
   /*
   ** Headers of the page
   */

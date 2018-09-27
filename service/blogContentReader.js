@@ -4,7 +4,7 @@ import axios from 'axios'
 // axios Client
 const createAxios = () => {
   return new axios.create({
-    baseURL: "http://localhost:3000"
+    baseURL: process.env.FRONT_API_URL
   })
 }
 

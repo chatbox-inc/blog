@@ -3,7 +3,7 @@ title: Vuex のデータをローカルストレージに格納する
 slug: gitbook_intro
 tag: 
  - gitbook
-created_at: 2018-09-25
+created_at: 2018-09-10
 is_open: true
 summary: | 
   Vue.jsアプリケーションのデータをシンプルに localStorage に格納してみましょう。

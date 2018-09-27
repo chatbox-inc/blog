@@ -32,7 +32,11 @@ export default {
     ListView
   },
   async fetch({store}){
-    await store.dispatch(`${moduleName}/LOAD_ARCHIVES`)
+    try{
+      await store.dispatch(`${moduleName}/LOAD_ARCHIVES`)
+    }catch (e) {
+      
+    }
   },
   data(){
     return {

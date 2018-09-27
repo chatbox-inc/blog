@@ -1,15 +1,19 @@
 ---
-title: Gitbook でドキュメントを作成する
-slug: gitbook_intro
+title: Netlify.toml で Netlify の Deploy 設定を管理する
+slug: netlify_toml
 tag: 
- - gitbook
-created_at: 2018-09-12
+ - netlify
+created_at: 2018-09-27
 is_open: true
 summary: | 
-  Gitbook を利用して、Markdown ベースで文書管理を行う方法についてまとめました。
+  Netlifuy.toml を利用して Netlify のデプロイ設定をコードベースで管理する方法を紹介します。
 ---
 
-## Gitbook の使い方
+## Netlify の デプロイ設定
+
+Netlify は静的サイト配信向けの Webサービスです。
+
+Github 等のリポジトリと連携して、
 
 Gitbook は node 製の Markdown 文書管理ツールです。
 
