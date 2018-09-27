@@ -35,7 +35,7 @@ export default {
     try{
       await store.dispatch(`${moduleName}/LOAD_ARCHIVES`)
     }catch (e) {
-      
+      console.error(e.message)
     }
   },
   data(){
@@ -62,7 +62,7 @@ export default {
     return {
       title: "",
       meta: [
-        {hid: 'description', name: 'description', content: '登録費・年会費無料！「イチコン」は、税理士が顧問先の経営課題解決のため中小企業診断士と連携するサービスです。顧問先の相談内容「だけ」を投稿して中小企業診断士に相談！中小企業診断士が問題解決に挙手します。顧問先と共に歩み、共に成長する事務所を作りたい税理士、コンサルティングに関心のある税理士が集まるサイトです。'}
+        {hid: 'description', name: 'description', content: ''}
       ],
     };
   },

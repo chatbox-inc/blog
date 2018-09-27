@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 module.exports = {
   env: {
     API_URL: process.env.FRONT_API_URL
@@ -9,7 +11,7 @@ module.exports = {
     title: 'blog',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1,minimum-scale=1' },
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
     link: [
@@ -52,10 +54,13 @@ module.exports = {
     }
   },
   router: {
-    middleware: 'index'
+    // middleware: 'index'
   },
   plugins: [
     "~/plugins/index.js",
   ],
+  modules:[
+    "@nuxtjs/pwa"
+  ]
 }
 
