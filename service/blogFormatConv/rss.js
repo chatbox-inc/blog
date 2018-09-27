@@ -11,8 +11,8 @@ const render = (posts) => {
   const articleData = posts.map((post) => (`
   <entry>
     <id>tag:qiita-feed-gen.potato4d.me,2017:WatchEvent/</id>
-    <published>${post.created_at}</published>
-    <updated>${post.created_at}</updated>
+    <published>${post.created_at}T00:00:00+0000</published>
+    <updated>${post.created_at}T00:00:00+0000</updated>
     <link type="text/html" rel="alternate" href="${post.html_url}"/>
     <title type="html">${post.title}</title>
     <author>
@@ -28,7 +28,7 @@ const render = (posts) => {
   <id>tag:qiita-feed-gen.potato4d.me,2017:/.private</id>
   <link type="text/html" rel="alternate" href="${config.hostname}"/>
   <title>chatbox.blog</title>
-  <updated>${moment().format()}</updated>${articleData}
+  <lastBuildDate>${moment().format()}</lastBuildDate>${articleData}
 </feed>`
 }
 
