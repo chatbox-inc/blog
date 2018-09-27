@@ -1,5 +1,6 @@
 const fs =require("fs-extra")
 const path =require("path")
+const moment = require("moment")
 
 // 簡易投稿型
 const createPostHeader = (args) => {
@@ -66,6 +67,18 @@ const convertBlogSumary = (path,handleEachContent)=>{
       handleEachContent({header,body})
     }
   }
+  rtn.sort((a,b)=>{
+    const aMom = moment(a.created_at)
+    const bMom = moment(b.created_at)
+    console.log(aMom.valueOf() + " / " + bMom.valueOf())
+    if(aMom.valueOf() > bMom.valueOf()){
+      return -1
+    }
+    if(aMom.valueOf() < bMom.valueOf()){
+      return 1
+    }
+    return 0
+  })
   return rtn
 }
 

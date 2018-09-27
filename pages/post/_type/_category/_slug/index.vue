@@ -33,8 +33,9 @@ export default {
   components: {
     ListView
   },
-  async fetch({store}){
-    const path = "/tips/others/gitbook_intro/index.json"
+  async fetch({store,route}){
+    const {type,category,slug} = route.params
+    const path = `${type}/${category}/${slug}/index.json`
     await store.dispatch(`${moduleName}/LOAD_POST`,{path})
   },
   data(){
