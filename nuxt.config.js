@@ -1,18 +1,35 @@
 require("dotenv").config()
 
+const meta = {
+  description: "株式会社chatboxは大阪堺筋本町の小さなWeb制作会社です。Web制作や技術顧問、イベント運営など、最新のWeb製作技術を活かした様々な活動を行っています。",
+  title: "株式会社 chatboxはWebのこれからを語り合う会社です。| 株式会社 chatbox(チャットボックス)"
+}
+
 module.exports = {
   env: {
-    API_URL: process.env.FRONT_API_URL
+    API_URL: process.env.FRONT_API_URL,
+    NODE_ENV: process.env.FRONT_API_URL,
   },
   /*
   ** Headers of the page
   */
   head: {
-    title: 'blog',
+    titleTemplate: meta.title,
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1,minimum-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      { name: 'viewport', content: 'width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no' },
+      { name: 'description', content: meta.description },
+      { name: 'keyword', content: "大阪,Web制作,技術顧問,イベント,PHP,フロントエンド,株式会社chatbox,チャットボックス" },
+      { property: 'og:title', content: meta.title },
+      { property: 'og:image', content: 'https://chatbox-inc.com/images/ogp.jpg' },
+      { property: 'og:url', content: 'https://chatbox-inc.com/' },
+      { property: 'og:description', content: meta.description},
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:site', content: '@chatbox_inc' },
+      { name: 'twitter:creator', content: '@chatbox_inc' },
+      { name: 'twitter:title', content: meta.title },
+      { name: 'twitter:description', content: meta.description },
+      { name: 'twitter:image', content: 'https://chatbox-inc.com/images/ogp.jpg' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
