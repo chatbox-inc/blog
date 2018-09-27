@@ -1,4 +1,4 @@
-import axios from 'axios'
+const axios = require('axios')
 
 
 // axios Client
@@ -8,15 +8,19 @@ const createAxios = () => {
   })
 }
 
-export const loadArchives = async () => {
+const modules = {}
+
+modules.loadArchives = async () => {
   const api = createAxios()
   const {data} = await api.get("/api/summary/index.json")
   return data
 }
 
-export const loadPost = async (path) => {
+modules.loadPost = async (path) => {
   const api = createAxios()
   const {data} = await api.get("/api/"+path)
   return data
 }
+
+module.exports = modules
 

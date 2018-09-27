@@ -1,4 +1,6 @@
 require("dotenv").config()
+const {loadArchives,loadPost} = require("./service/blogContentReader")
+
 
 const meta = {
   description: "株式会社chatboxは大阪堺筋本町の小さなWeb制作会社です。Web制作や技術顧問、イベント運営など、最新のWeb製作技術を活かした様々な活動を行っています。",
@@ -48,6 +50,15 @@ module.exports = {
   css: [
     {src: 'highlight.js/styles/solarized-dark.css',lang:'css'},
   ],
+  generate: {
+    fallback: true,
+    async routes() {
+      const posts = await loadArchives()
+      return posts.map((post)=>{
+        return post.html_url
+      })
+    }
+  },
   /*
   ** Customize the progress bar color
   */
