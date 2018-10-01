@@ -16,3 +16,5 @@ api
 .env
 
 static/*.xml
+
+sw.*

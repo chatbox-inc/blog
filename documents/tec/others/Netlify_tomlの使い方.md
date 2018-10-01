@@ -56,4 +56,37 @@ Netlify の特徴の一つとして、一つのGitリポジトリから
 ブランチやPRベースで生成される各環境に応じて、
 異なる設定を行いたい場合にも、`netlify.toml` が利用されます。
 
+```toml
+[context.production]
+  command = "npm run build"
 
+[context.deploy-preview]
+  command = "npm run preview"
+
+[context.branch-deploy]
+  command = "npm run dev"
+```
+
+上記の様に `context.***` のディレクトリで設定を記載することで、
+デフォルトの `build` の設定を上書きすることができます。
+
+`production` は production で指定したブランチのデプロイ時に、
+`deploy-preview` は 各種 PR に反応してデプロイされる環境に、
+`branch-deploy` は production 以外のブランチやタグに反応して行われるデプロイ時に適用されます。
+
+デプロイステージごとに 環境変数を切り替える場合 `environment` ディレクトリで値を設定します。
+
+```
+[context.production.environment]
+  FRONT_API_URL="xxxxxxx"
+
+```
+
+`branch-deploy` コンテキストについては、ブランチ名を指定しての操作も可能です。
+
+```
+[context.master.environment]
+  FRONT_API_URL="xxxxxxx"
+[context.dev.environment]
+  FRONT_API_URL="xxxxxxx"
+```
