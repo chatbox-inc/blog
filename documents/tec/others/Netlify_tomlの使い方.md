@@ -76,7 +76,7 @@ Netlify の特徴の一つとして、一つのGitリポジトリから
 
 デプロイステージごとに 環境変数を切り替える場合 `environment` ディレクトリで値を設定します。
 
-```
+```toml
 [context.production.environment]
   FRONT_API_URL="xxxxxxx"
 
@@ -84,7 +84,7 @@ Netlify の特徴の一つとして、一つのGitリポジトリから
 
 `branch-deploy` コンテキストについては、ブランチ名を指定しての操作も可能です。
 
-```
+```toml
 [context.master.environment]
   FRONT_API_URL="xxxxxxx"
 [context.dev.environment]
