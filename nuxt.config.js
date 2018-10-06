@@ -1,10 +1,10 @@
 require("dotenv").config()
 import {loadArchives,loadPost} from "./service/blogContentReader"
-
+import axios from "axios"
 import createMeta from "./service/meta"
 
 module.exports = {
-  mode: "universal",
+  mode: "spa",
   env: {
     API_URL: process.env.FRONT_API_URL,
     NODE_ENV: process.env.FRONT_API_URL,
@@ -43,8 +43,10 @@ module.exports = {
   ],
   generate: {
     fallback: true,
-    async routes({$axios}) {
-      const posts = await loadArchives($axios)
+    async routes(args) {
+      const posts = await loadArchives(axios.create({
+        baseURL: process.env.FRONT_API_URL
+      }))
       return posts.map((post)=>{
         return post.html_url
       })
