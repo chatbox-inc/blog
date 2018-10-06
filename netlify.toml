@@ -6,7 +6,7 @@
   command = "npm run generate"
 
 [build.environment]
-  API_URL="https://agitated-ride-b961a8.netlify.com/"
+  API_URL="https://note.chatbox-inc.com/"
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
 [context.production]
