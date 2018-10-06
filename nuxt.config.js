@@ -4,10 +4,9 @@ import axios from "axios"
 import createMeta from "./service/meta"
 
 module.exports = {
-  mode: "spa",
+  mode: "universal",
   env: {
-    API_URL: process.env.FRONT_API_URL,
-    NODE_ENV: process.env.FRONT_API_URL,
+    API_URL: process.env.API_URL
   },
   /*
   ** Headers of the page
@@ -43,12 +42,13 @@ module.exports = {
   ],
   generate: {
     fallback: true,
-    async routes(args) {
-      const posts = await loadArchives(axios.create({
-        baseURL: process.env.FRONT_API_URL
-      }))
-      return posts.map((post)=>{
-        return post.html_url
+    routes() {
+      return loadArchives(axios.create({
+        baseURL: process.env.API_URL
+      })).then((posts)=>{
+        return posts.map((post)=>{
+          return post.html_url
+        })
       })
     }
   },
@@ -85,9 +85,5 @@ module.exports = {
     "@nuxtjs/pwa",
     "@nuxtjs/axios"
   ],
-  axios:{
-    baseURL: process.env.NUXT_ENV_FRONT_API_URL
-  }
-
 }
 
