@@ -16,9 +16,11 @@
           <p class="post-meta">Posted by
             <a >mikakane</a>
             on {{ post.header.created_at }}</p>
-          <p class="text-center">
-            <i class="fas fa-ellipsis-h fa-2x"/>
-          </p>
+          <div class="text-center">
+            <br>
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-via="chatbox_inc" data-hashtags="chatbox_note" data-related="chatbox_inc" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+          </div>
           <p class="text-center">
             <router-link 
               class="btn btn-link btn-lg" 
