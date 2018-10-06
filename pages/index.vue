@@ -2,17 +2,21 @@
   <div>
 
     <page-header v-bind="header"/>
-
     <!-- Main Content -->
-    <div class="container" v-if="posts != null">
+    <div 
+      v-if="posts != null" 
+      class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <list-view v-for="(post,index) in posts" :key="index" :post="post"/>
-          <!-- Pager -->
-          <!--<div class="clearfix">-->
+          <list-view 
+            v-for="(post,index) in posts" 
+            :key="index" 
+            :post="post"/>
+            <!-- Pager -->
+            <!--<div class="clearfix">-->
             <!--<a class="btn btn-primary float-left" href="#">&larr; 前へ</a>-->
             <!--<a class="btn btn-primary float-right" href="#">次へ &rarr;</a>-->
-          <!--</div>-->
+            <!--</div>-->
         </div>
       </div>
     </div>
@@ -31,6 +35,7 @@ export default {
   components: {
     ListView
   },
+  watchQuery:true,
   async fetch({store}){
     try{
       await store.dispatch(`${moduleName}/LOAD_ARCHIVES`)
@@ -49,22 +54,8 @@ export default {
   computed:{
     ...mapState(moduleName,["posts"]),
   },
-  pageInfo(){
-    return {
-      title: "",
-
-    }
-  },
   mounted(){
     console.log(this.$store.state.posts)
-  },
-  head() {
-    return {
-      title: "",
-      meta: [
-        {hid: 'description', name: 'description', content: ''}
-      ],
-    };
   },
 }
 </script>

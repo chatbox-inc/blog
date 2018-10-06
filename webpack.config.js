@@ -7,8 +7,8 @@ module.exports = {
     extensions: ['.js', '.json', '.vue', '.ts'],
     root: path.resolve(__dirname),
     alias: {
-      '@': path.resolve(__dirname+"/nuxtjs/"),
-      '~': path.resolve(__dirname+"/nuxtjs/"),
+      '@': path.resolve(__dirname),
+      '~': path.resolve(__dirname),
     },
   },
 }

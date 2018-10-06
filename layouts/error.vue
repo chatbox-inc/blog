@@ -10,7 +10,10 @@
 
             <p>
               紛失した記事に関するお問い合わせや、ブログコンテンツの追加依頼等、サイトに関するお困り事は、
-              <a href="https://chatbox-inc.com/contact/" target="_blank" rel="noopener">お問い合わせ</a>
+              <a 
+                href="https://chatbox-inc.com/contact/" 
+                target="_blank" 
+                rel="noopener">お問い合わせ</a>
               までお寄せください。
             </p>
 
@@ -31,7 +34,12 @@
   import PageNavi from "~/components/layout/Navigation"
 
   export default {
-    props: ['error'],
+    props: {
+      error:{
+        type: Object,
+        required: true
+      }
+    },
     data(){
       return {
         header:{

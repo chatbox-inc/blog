@@ -1,6 +1,6 @@
 ---
 title: Vuex のデータをローカルストレージに格納する
-slug: gitbook_intro
+slug: vuex-persistedstate
 tag: 
  - gitbook
 created_at: 2018-09-10

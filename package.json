@@ -13,13 +13,14 @@
     "generate:nuxt": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "api": "run-s api:*",
-    "api:clean": "rm -rf static/_api && mkdir static/_api",
-    "api:generate_report": "processmd documents/**/*.md --stdout --outputDir static/_api > static/_api/summary.json",
+    "api:clean": "rm -rf _api && mkdir _api",
+    "api:generate_report": "processmd documents/**/*.md documents/**/*.yml --stdout --outputDir _api > _api/summary.json",
     "api:clean2": "rm -rf static/api && mkdir static/api",
     "api:generate_report2": "node ./service/blogFormatConv.js",
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.3.3",
     "@nuxtjs/dotenv": "^1.1.1",
     "@nuxtjs/pwa": "^2.6.0",
     "api": "^1.0.0",
@@ -28,15 +29,15 @@
     "highlight.js": "^9.12.0",
     "moment": "^2.22.2",
     "npm-run-all": "^4.1.3",
-    "nuxt": "^1.0.0",
+    "nuxt": "^2.1.0",
     "processmd": "^4.2.1",
     "sitemap": "^2.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
-    "eslint": "^4.15.0",
+    "eslint": "^5.6.1",
     "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.7.1",
+    "eslint-loader": "^2.1.1",
     "eslint-plugin-vue": "^4.0.0"
   }
 }

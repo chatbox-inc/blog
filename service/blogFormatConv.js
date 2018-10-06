@@ -28,50 +28,46 @@ const createPostBody = ({ content }) => {
   return { content }
 }
 
-//
-const convertFilemap2Briefs = (args) => {
-  const {
-    title, created_at, base,dir, ext,slug,summary
-  } = args
-  const _created_at = created_at && created_at.substr(0,10)
-  const category = '/' + dir.substr(8)
-  const html_url = '/post/' + dir.substr(12) + '/' + slug
-  return createPostHeader({
-    title,
-    category,
-    slug,
-    html_url,
-    summary,
-    created_at: _created_at,
-  })
-}
-
-const convertFile2Post = (args) => {
-  const {
-    bodyHtml
-  } = args
-
-  return createPostBody({
-    content: bodyHtml
-  })
+const convertFile2Post = (metaContents, fileContents) => {
+  const category =  fileContents.dir.substr(5)
+  return {
+    header: createPostHeader({
+      title: fileContents.title,
+      category: '/' + category,
+      slug: fileContents.slug,
+      html_url: '/post/' + category + '/' + fileContents.slug,
+      summary: fileContents.summary,
+      created_at: fileContents.created_at && fileContents.created_at.substr(0,10),
+    }),
+    body: createPostBody({
+      content: fileContents.bodyHtml
+    })
+  }
 }
 
 // FS 周り
-const convertBlogSumary = (path,handleEachContent)=>{
-  const {fileMap} = JSON.parse(fs.readFileSync( path, 'utf8'));
+const convertBlogSumary = (summarypath,handleEachContent)=>{
+  const {posts} = JSON.parse(fs.readFileSync( summarypath, 'utf8'));
   const rtn = [];
-  for(let fileKey in fileMap){
-    if(fileMap[fileKey].is_open){
-      const header = convertFilemap2Briefs(fileMap[fileKey])
-      const body = convertFile2Post(JSON.parse(fs.readFileSync( fileKey, 'utf8')))
+  for(let key in posts){
+    const metaContents = { key, ... posts[key]}
+
+    const contentPath = path.resolve("_api/",metaContents.dir,metaContents.path).replace(".md",".json");
+    const fileContents = JSON.parse(fs.readFileSync( contentPath, 'utf8'))
+
+    if(validateFile(metaContents, fileContents)){
+      const {header,body} = convertFile2Post(metaContents,fileContents)
       rtn.push(header)
       handleEachContent({header,body})
     }
   }
-  rtn.sort((a,b)=>{
+  return sortBlogSummary(rtn)
+}
+
+const sortBlogSummary = (posts)=> {
+  posts.sort((a,b)=>{
     const aMom = moment(a.created_at)
     const bMom = moment(b.created_at)
-    console.log(aMom.valueOf() + " / " + bMom.valueOf())
     if(aMom.valueOf() > bMom.valueOf()){
       return -1
     }
@@ -80,7 +76,15 @@ const convertBlogSumary = (path,handleEachContent)=>{
     }
     return 0
   })
-  return rtn
+  return posts
+}
+
+const validateFile = (metaContents, fileContents)=>{
+  if(!fileContents.is_open){
+    console.error(`fail to load ${metaContents.path} is not 'is_open as true'`)
+    return false
+  }
+  return true;
 }
 
 
@@ -88,11 +92,10 @@ const convertBlogSumary = (path,handleEachContent)=>{
 const main = () => {
   // ブログサマリーフォーマットの修正
   // ブログ個別記事の修正
-  const summaryUri = path.resolve("static/_api/summary.json")
+  const summaryUri = path.resolve("_api/index.json")
 
   const summary = convertBlogSumary(summaryUri,({header,body}) => {
-    const contentDir = path.resolve('static' , './'+header.category , header.slug)
-    console.log(contentDir)
+    const contentDir = path.resolve('static' , './api/'+header.category , header.slug)
     fs.mkdirsSync(contentDir)
     fs.writeFileSync(path.resolve(contentDir,"index.json"),JSON.stringify({
       header,body

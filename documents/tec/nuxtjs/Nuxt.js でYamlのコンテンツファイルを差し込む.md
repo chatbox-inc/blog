@@ -1,6 +1,6 @@
 ---
 title: Nuxt.js で Yaml のコンテンツファイルを差し込む
-slug: vue-smooth-scroll
+slug: yaml_on_nuxtjs
 tag: 
  - yaml-on-nuxt
 created_at: 2018-10-02

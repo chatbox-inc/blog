@@ -19,11 +19,11 @@ export const mutations = {
 
 export const actions = {
   async LOAD_ARCHIVES({commit},){
-    const posts = await loadArchives()
+    const posts = await loadArchives(this.$axios)
     commit("SET_POSTS",posts)
   },
   async LOAD_POST({commit},{path}){
-    const post = await loadPost(path)
+    const post = await loadPost(this.$axios,path)
     commit("SET_POST",post)
   },
 }

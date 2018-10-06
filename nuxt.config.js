@@ -1,13 +1,10 @@
 require("dotenv").config()
-const {loadArchives,loadPost} = require("./service/blogContentReader")
+import {loadArchives,loadPost} from "./service/blogContentReader"
 
-
-const meta = {
-  description: "株式会社chatboxは大阪堺筋本町の小さなWeb制作会社です。Web制作や技術顧問、イベント運営など、最新のWeb製作技術を活かした様々な活動を行っています。",
-  title: "株式会社 chatboxはWebのこれからを語り合う会社です。| 株式会社 chatbox(チャットボックス)"
-}
+import createMeta from "./service/meta"
 
 module.exports = {
+  mode: "universal",
   env: {
     API_URL: process.env.FRONT_API_URL,
     NODE_ENV: process.env.FRONT_API_URL,
@@ -16,22 +13,16 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    titleTemplate: meta.title,
+    titleTemplate: "%s | 株式会社 chatbox の Web制作レポート chatbox.note",
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, minimum-scale=1, initial-scale=1' },
-      { name: 'description', content: meta.description },
-      { name: 'keyword', content: "大阪,Web制作,技術顧問,イベント,PHP,フロントエンド,株式会社chatbox,チャットボックス" },
-      { property: 'og:title', content: meta.title },
-      { property: 'og:image', content: 'https://chatbox-inc.com/images/ogp.jpg' },
-      { property: 'og:url', content: 'https://chatbox-inc.com/' },
-      { property: 'og:description', content: meta.description},
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:site', content: '@chatbox_inc' },
-      { name: 'twitter:creator', content: '@chatbox_inc' },
-      { name: 'twitter:title', content: meta.title },
-      { name: 'twitter:description', content: meta.description },
-      { name: 'twitter:image', content: 'https://chatbox-inc.com/images/ogp.jpg' },
+      ...createMeta({
+        description: "Laravel や Vue.js / Nuxt.js など PHP/フロントエンドを中心にWeb開発や、技術顧問を行う株式会社chatboxのWeb制作レポート。",
+        title: "トップ" ,
+        host: "https://note.chatbox-inc.com",
+        image: "/img/brand_image.jpg"
+      }),
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -52,8 +43,8 @@ module.exports = {
   ],
   generate: {
     fallback: true,
-    async routes() {
-      const posts = await loadArchives()
+    async routes({$axios}) {
+      const posts = await loadArchives($axios)
       return posts.map((post)=>{
         return post.html_url
       })
@@ -86,9 +77,15 @@ module.exports = {
   },
   plugins: [
     "~/plugins/index.js",
+    "~/plugins/axios.js",
   ],
   modules:[
-    "@nuxtjs/pwa"
-  ]
+    "@nuxtjs/pwa",
+    "@nuxtjs/axios"
+  ],
+  axios:{
+    baseURL: process.env.NUXT_ENV_FRONT_API_URL
+  }
+
 }
 
