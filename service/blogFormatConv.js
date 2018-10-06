@@ -90,6 +90,7 @@ const validateFile = (metaContents, fileContents)=>{
 
 
 const main = () => {
+  console.log(process.env)
   // ブログサマリーフォーマットの修正
   // ブログ個別記事の修正
   const summaryUri = path.resolve("_api/index.json")
